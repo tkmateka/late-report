@@ -1,1 +1,66 @@
-<p>sign-up works!</p>
+<div class="flex column center-center full-height">
+    <mat-card class="auth-card half-width">
+        <h2 class="text-center no-top-margin">Register</h2>
+        <form #registerForm="ngForm" (submit)="submit()">
+            <!-- First name -->
+            <mat-form-field class="full-width">
+                <mat-label>First name</mat-label>
+                <input type="text" matInput placeholder="Joe" required
+                    [(ngModel)]="registerFormData.firstName" name="firstName" #firstName="ngModel">
+                <mat-error *ngIf="firstName.invalid && firstName.errors && firstName.errors['required']">
+                    First name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <!-- Last name -->
+            <mat-form-field class="full-width">
+                <mat-label>Last name</mat-label>
+                <input type="text" matInput placeholder="Doe" required
+                    [(ngModel)]="registerFormData.lastName" name="lastName" #lastName="ngModel">
+                <mat-error *ngIf="lastName.invalid && lastName.errors && lastName.errors['required']">
+                    Last name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <!-- Email -->
+            <mat-form-field class="full-width">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput placeholder="Ex. pat@example.com" required
+                    [(ngModel)]="registerFormData.email" name="email" #email="ngModel">
+                <mat-error *ngIf="email.invalid && email.errors && email.errors['pattern']">
+                    Please enter a valid email address
+                </mat-error>
+                <mat-error *ngIf="email.invalid && email.errors && email.errors['required']">
+                    Email is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <!-- Password -->
+            <mat-form-field class="full-width">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput placeholder="****" required
+                    [(ngModel)]="registerFormData.password" name="password" #password="ngModel">
+                <mat-error *ngIf="password.invalid && password.errors && password.errors['required']">
+                    Password is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <!-- Confirm Password -->
+            <mat-form-field class="full-width">
+                <mat-label>Confirm Password</mat-label>
+                <input type="password" matInput placeholder="****" required
+                    [(ngModel)]="registerFormData.confirmPassword" name="confirmPassword" #confirmPassword="ngModel">
+                <mat-error *ngIf="confirmPassword.invalid && confirmPassword.errors && confirmPassword.errors['required']">
+                    Confirm Password is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <p>Already a user? <span class="link" routerLink="/sign-in">Sign-In</span></p>
+
+            <!-- Action buttons -->
+            <div class="flex gap-1em">
+                <button mat-raised-button color="warn" class="flex-1" (click)="registerForm.reset()">Cancel</button>
+                <button mat-raised-button color="primary" class="flex-1" [disabled]="registerForm.invalid">Submit</button>
+            </div>
+        </form>
+    </mat-card>
+</div>

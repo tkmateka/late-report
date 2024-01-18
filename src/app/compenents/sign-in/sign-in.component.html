@@ -1,1 +1,38 @@
-<p>sign-in works!</p>
+<div class="flex column center-center full-height">
+    <mat-card class="auth-card half-width">
+        <h2 class="text-center no-top-margin">Login</h2>
+        <form #loginForm="ngForm" (submit)="submit()">
+
+            <!-- Email -->
+            <mat-form-field class="full-width">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput placeholder="Ex. pat@example.com" required
+                    [(ngModel)]="loginFormData.email" name="email" #email="ngModel">
+                <mat-error *ngIf="email.invalid && email.errors && email.errors['pattern']">
+                    Please enter a valid email address
+                </mat-error>
+                <mat-error *ngIf="email.invalid && email.errors && email.errors['required']">
+                    Email is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <!-- Password -->
+            <mat-form-field class="full-width">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput placeholder="****" required
+                    [(ngModel)]="loginFormData.password" name="password" #password="ngModel">
+                <mat-error *ngIf="password.invalid && password.errors && password.errors['required']">
+                    Password is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <p>Don't have an account? <span class="link" routerLink="/sign-up">Sign-Up</span></p>
+
+            <!-- Action buttons -->
+            <div class="flex gap-1em">
+                <button mat-raised-button color="warn" class="flex-1" (click)="loginForm.reset()">Cancel</button>
+                <button mat-raised-button color="primary" class="flex-1" [disabled]="loginForm.invalid">Submit</button>
+            </div>
+        </form>
+    </mat-card>
+</div>

@@ -36,6 +36,6 @@ export class LandingComponent {
 
   goTo(_class:any):void {
     sessionStorage.setItem('class', JSON.stringify(_class));
-    this.router.navigate(['/home/candidate'])
+    this.router.navigate([`/${this.user.role}/candidate`])
   }
 }

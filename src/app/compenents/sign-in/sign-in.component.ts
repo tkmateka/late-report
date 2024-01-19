@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -13,7 +14,7 @@ export class SignInComponent {
     password: ''
   }
 
-  constructor(private snackbar: MatSnackBar, private router: Router) { }
+  constructor(private snackbar: MatSnackBar, private router: Router, private sharedService: SharedService) { }
 
   submit(): void {
     // Fetch all users
@@ -29,7 +30,14 @@ export class SignInComponent {
           // Store current user in session
           sessionStorage.setItem('user', JSON.stringify(foundUser));
           // Navigate the user to the dashboard
-          this.router.navigate(['/landing']);
+          if (foundUser.role === 'candidate') {
+            let allClasses = this.sharedService.get('classes', 'local');
+            let studentClass = allClasses.find((_class:any) => _class.classId === foundUser.classId)
+            sessionStorage.setItem('class', JSON.stringify(studentClass));
+            this.router.navigate(['/home/late-report-candidate']);
+          } else {
+            this.router.navigate(['/landing']);
+          }
         } else {
           this.snackbar.open(`Incorrect password`, 'Ok', { duration: 3000 });
         }

@@ -10,6 +10,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material/material.module';
 import { FormsModule } from '@angular/forms';
 import { LandingComponent } from './compenents/landing/landing.component';
+import { AddClassComponent } from './popups/add-class/add-class.component';
+import { HomeComponent } from './compenents/home/home.component';
+import { ViewCandidatesComponent } from './compenents/view-candidates/view-candidates.component';
+import { ViewLateReportComponent } from './compenents/view-late-report/view-late-report.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +21,11 @@ import { LandingComponent } from './compenents/landing/landing.component';
     SignInComponent,
     SignUpComponent,
     PageNotFoundComponent,
-    LandingComponent
+    LandingComponent,
+    AddClassComponent,
+    HomeComponent,
+    ViewCandidatesComponent,
+    ViewLateReportComponent
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent {
+  classes:any = [];
   roles:string[] = ['facilitator', 'candidate', 'admin']
   registerFormData: any = {
     firstName: '',

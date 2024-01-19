@@ -24,12 +24,14 @@ export class SignInComponent {
       // Check if user exist
       const foundUser = users.find((user: any) => user.email === this.loginFormData.email);
 
-      if(foundUser) {
-        if(foundUser.password === this.loginFormData.password) {
+      if (foundUser) {
+        if (foundUser.password === this.loginFormData.password) {
           // Store current user in session
           sessionStorage.setItem('user', JSON.stringify(foundUser));
           // Navigate the user to the dashboard
           this.router.navigate(['/home']);
+        } else {
+          this.snackbar.open(`Incorrect password`, 'Ok', { duration: 3000 });
         }
       } else {
         this.snackbar.open(`${this.loginFormData.email} is not found`, 'Ok', { duration: 3000 });

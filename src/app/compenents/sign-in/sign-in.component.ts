@@ -29,7 +29,7 @@ export class SignInComponent {
           // Store current user in session
           sessionStorage.setItem('user', JSON.stringify(foundUser));
           // Navigate the user to the dashboard
-          this.router.navigate(['/home']);
+          this.router.navigate(['/landing']);
         } else {
           this.snackbar.open(`Incorrect password`, 'Ok', { duration: 3000 });
         }

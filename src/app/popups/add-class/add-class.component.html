@@ -1,0 +1,63 @@
+<div class="flex column center-center auth-card">
+    <h2 class="text-center no-top-margin">Add a new Class</h2>
+    <form #classForm="ngForm" class="full-width">
+        <!-- Class Name -->
+        <mat-form-field class="full-width">
+            <mat-label>Class Name</mat-label>
+            <input type="text" matInput placeholder="Maths" required [(ngModel)]="classFormData.className"
+                name="className" #className="ngModel">
+            <mat-error *ngIf="className.invalid && className.errors && className.errors['required']">
+                Class name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Class Description -->
+        <mat-form-field class="full-width">
+            <mat-label>Class Description</mat-label>
+            <input type="text" matInput placeholder="Maths" required [(ngModel)]="classFormData.classDescription"
+                name="classDescription" #classDescription="ngModel">
+            <mat-error *ngIf="classDescription.invalid && classDescription.errors && classDescription.errors['required']">
+                Class description is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Facilitator -->
+        <mat-form-field class="full-width">
+            <mat-label>Facilitator</mat-label>
+            <input type="text" matInput placeholder="Maths" required [(ngModel)]="classFormData.facilitator"
+                name="facilitator" #facilitator="ngModel" readonly>
+            <mat-error *ngIf="facilitator.invalid && facilitator.errors && facilitator.errors['required']">
+                Facilitator is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Time In/Out -->
+        <div class="flex gap-1em">
+            <!-- In -->
+            <mat-form-field class="full-width">
+                <mat-label>Time In</mat-label>
+                <input type="time" matInput placeholder="08:00" required [(ngModel)]="classFormData.timeIn"
+                    name="timeIn" #timeIn="ngModel">
+                <mat-error *ngIf="timeIn.invalid && timeIn.errors && timeIn.errors['required']">
+                    Time In is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <!-- Out -->
+            <mat-form-field class="full-width">
+                <mat-label>Time Out</mat-label>
+                <input type="time" matInput placeholder="08:00" required [(ngModel)]="classFormData.timeOut"
+                    name="timeOut" #timeOut="ngModel">
+                <mat-error *ngIf="timeOut.invalid && timeOut.errors && timeOut.errors['required']">
+                    Time Out is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="flex gap-1em margin-top-1em">
+            <button mat-raised-button color="warn" class="flex-1" (click)="close()">Cancel</button>
+            <button mat-raised-button color="primary" class="flex-1" [disabled]="classForm.invalid"
+                (click)="submit()">Submit</button>
+        </div>
+    </form>
+</div>

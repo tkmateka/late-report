@@ -1,7 +1,7 @@
-<div class="flex column center-center full-height">
+<div class="flex column center-center full-height padding-top-bottom-4em">
     <mat-card class="auth-card half-width">
         <h2 class="text-center no-top-margin">Register</h2>
-        <form #registerForm="ngForm" (submit)="submit()">
+        <form #registerForm="ngForm">
             <!-- First name -->
             <mat-form-field class="full-width">
                 <mat-label>First name</mat-label>
@@ -38,14 +38,27 @@
             <mat-form-field class="full-width">
                 <mat-label>Select a role</mat-label>
                 <mat-select [(ngModel)]="registerFormData.role" name="role" #role="ngModel" required>
-                  <mat-option *ngFor="let role of roles" [value]="role">
-                    {{role | titlecase}}
-                  </mat-option>
+                    <mat-option *ngFor="let role of roles" [value]="role">
+                        {{role | titlecase}}
+                    </mat-option>
                 </mat-select>
                 <mat-error *ngIf="role.invalid && role.errors && role.errors['required']">
                     Role is <strong>required</strong>
                 </mat-error>
-              </mat-form-field>
+            </mat-form-field>
+
+            <!-- Class -->
+            <mat-form-field class="full-width" *ngIf="role.value === 'candidate'">
+                <mat-label>Select a class</mat-label>
+                <mat-select [(ngModel)]="registerFormData.classId" name="classId" #classId="ngModel" required>
+                    <mat-option *ngFor="let class of classes" [value]="class.classId">
+                        {{class.name | titlecase}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="classId.invalid && classId.errors && classId.errors['required']">
+                    Class is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
 
             <!-- Password -->
             <mat-form-field class="full-width">
@@ -73,8 +86,8 @@
             <!-- Action buttons -->
             <div class="flex gap-1em">
                 <button mat-raised-button color="warn" class="flex-1" (click)="registerForm.reset()">Cancel</button>
-                <button mat-raised-button color="primary" class="flex-1"
-                    [disabled]="registerForm.invalid">Submit</button>
+                <button mat-raised-button color="primary" class="flex-1" [disabled]="registerForm.invalid"
+                    (click)="submit()">Submit</button>
             </div>
         </form>
     </mat-card>

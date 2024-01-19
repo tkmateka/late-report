@@ -1,7 +1,7 @@
 <div class="flex column center-center full-height">
     <mat-card class="auth-card half-width">
         <h2 class="text-center no-top-margin">Login</h2>
-        <form #loginForm="ngForm" (submit)="submit()">
+        <form #loginForm="ngForm">
 
             <!-- Email -->
             <mat-form-field class="full-width">
@@ -31,7 +31,7 @@
             <!-- Action buttons -->
             <div class="flex gap-1em">
                 <button mat-raised-button color="warn" class="flex-1" (click)="loginForm.reset()">Cancel</button>
-                <button mat-raised-button color="primary" class="flex-1" [disabled]="loginForm.invalid">Submit</button>
+                <button mat-raised-button color="primary" class="flex-1" [disabled]="loginForm.invalid" (click)="submit()">Submit</button>
             </div>
         </form>
     </mat-card>

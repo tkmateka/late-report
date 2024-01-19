@@ -3,12 +3,33 @@
         <div class="header flex center-center">
             <h2 class="no-margin">Welcome to Late-Report App</h2>
         </div>
-        <div class="flex start-start gap-1em wrap displayer">
-            <mat-card class="add-class flex center-center text-center pointer" matTooltip="Add a new class">
-                <mat-icon color="accent">add_circle</mat-icon>
-                <p>Add Class</p>
-            </mat-card>
-            <!-- <mat-card>Add Class</mat-card> -->
+        <p *ngIf="classes.length < 1" class="text-center red-color">There are no classes available yet</p>
+        <div class="displayer">
+            <div class="flex gap-1em wrap">
+                <!-- Add Class -->
+                <mat-card class="add-class flex center-center text-center pointer" matTooltip="Add a new class"
+                    *ngIf="user.role === 'facilitator'" (click)="addClass()">
+                    <mat-icon color="accent">add_circle</mat-icon>
+                    <p>Add Class</p>
+                </mat-card>
+                <!-- List Of Classes -->
+                <mat-card *ngFor="let class of classes" class="flex column gap-1em relative" (click)="goTo(class)">
+                    <div class="badge flex center-center">
+                        {{class.candidateCount}}
+                    </div>
+                    <mat-card-header>
+                        <mat-card-title>{{class.className}}</mat-card-title>
+                        <mat-card-subtitle><b>Facilitator: </b>{{class.facilitator | titlecase}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="margin-bottom-10px">
+                            <small>{{class.classDescription}}</small>
+                        </div>
+                        <small><b>Time IN: </b>{{class.timeIn}}</small> <br>
+                        <small class="no-top-margin"><b>Time OUT: </b>{{class.timeOut}}</small>
+                    </mat-card-content>
+                </mat-card>
+            </div>
         </div>
     </div>
 </div>

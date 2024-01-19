@@ -9,13 +9,15 @@ import { PageNotFoundComponent } from './compenents/page-not-found/page-not-foun
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material/material.module';
 import { FormsModule } from '@angular/forms';
+import { LandingComponent } from './compenents/landing/landing.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
     SignUpComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,

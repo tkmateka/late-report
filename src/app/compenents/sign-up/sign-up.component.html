@@ -51,8 +51,8 @@
             <mat-form-field class="full-width" *ngIf="role.value === 'candidate'">
                 <mat-label>Select a class</mat-label>
                 <mat-select [(ngModel)]="registerFormData.classId" name="classId" #classId="ngModel" required>
-                    <mat-option *ngFor="let class of classes" [value]="class.classId">
-                        {{class.name | titlecase}}
+                    <mat-option *ngFor="let _class of classes" [value]="_class.classId">
+                        {{_class.className | titlecase}}
                     </mat-option>
                 </mat-select>
                 <mat-error *ngIf="classId.invalid && classId.errors && classId.errors['required']">

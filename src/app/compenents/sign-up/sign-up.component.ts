@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -8,8 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent {
-  classes:any = [];
-  roles:string[] = ['facilitator', 'candidate', 'admin']
+  classes: any = [];
+  roles: string[] = ['facilitator', 'candidate', 'admin']
   registerFormData: any = {
     firstName: '',
     lastName: '',
@@ -19,11 +20,13 @@ export class SignUpComponent {
     confirmPassword: ''
   }
 
-  constructor(private snackbar: MatSnackBar, private router: Router) { }
+  constructor(private snackbar: MatSnackBar, private router: Router, private sharedService: SharedService) {
+    this.classes = this.sharedService.get('classes', 'local');
+  }
 
   submit(): void {
     // Check if password was confirmed
-    if(this.registerFormData.password !== this.registerFormData.confirmPassword) {
+    if (this.registerFormData.password !== this.registerFormData.confirmPassword) {
       this.snackbar.open(`Password don't match`, 'Ok', { duration: 3000 })
       return;
     }
@@ -47,9 +50,22 @@ export class SignUpComponent {
     }
   }
 
-  addNewUser(users:any):void {
+  addNewUser(users: any): void {
     // Remove confirmPassword prperty
     delete this.registerFormData.confirmPassword;
+    // If this is a candidate, then add them into their specific class
+    if (this.registerFormData.role === 'candidate') {
+      this.registerFormData['lateReports'] = [];
+      this.classes.forEach((_class: any) => {
+        if (_class.classId === this.registerFormData.classId) {
+          // Add the new candidate to the current class
+          _class.candidates.push(this.registerFormData);
+          _class.candidateCount++;
+        }
+      })
+      // Update classes
+      localStorage.setItem('classes', JSON.stringify(this.classes));
+    }
     // If it doesn't, add the new user to the list
     users.push(this.registerFormData);
     // Update local storage

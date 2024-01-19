@@ -8,13 +8,29 @@ import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './compenents/home/home.component';
 import { ViewCandidatesComponent } from './compenents/view-candidates/view-candidates.component';
 import { ViewLateReportComponent } from './compenents/view-late-report/view-late-report.component';
+import { ViewLateReportCandidateComponent } from './compenents/view-late-report-candidate/view-late-report-candidate.component';
+import { CandidateGuard } from './guards/candidate.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/landing', pathMatch: 'full' }, // redirect to `first-component`
-  { path: 'home', redirectTo: '/home/candidate', pathMatch: 'full' }, // redirect to `first-component`
-  { path: 'landing', component: LandingComponent, canActivate: [AuthGuard] },
+  { path: 'facilitator', redirectTo: '/facilitator/candidate', pathMatch: 'full' }, // redirect to `first-component`
+  { path: 'candidate', redirectTo: '/candidate/late-report-candidate', pathMatch: 'full' }, // redirect to `first-component`
+  { path: 'admin', redirectTo: '/admin/candidate', pathMatch: 'full' }, // redirect to `first-component`
+  { path: 'landing', component: LandingComponent, canActivate: [AuthGuard, AdminGuard] },
   {
-    path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
+    path: 'facilitator', component: HomeComponent, canActivate: [AuthGuard, AdminGuard], children: [
+      { path: 'candidate', component: ViewCandidatesComponent },
+      { path: 'late-report', component: ViewLateReportComponent },
+    ]
+  },
+  {
+    path: 'candidate', component: HomeComponent, canActivate: [AuthGuard, CandidateGuard], children: [
+      { path: 'late-report-candidate', component: ViewLateReportCandidateComponent },
+    ]
+  },
+  {
+    path: 'admin', component: HomeComponent, canActivate: [AuthGuard, AdminGuard], children: [
       { path: 'candidate', component: ViewCandidatesComponent },
       { path: 'late-report', component: ViewLateReportComponent },
     ]

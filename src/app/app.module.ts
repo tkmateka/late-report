@@ -14,6 +14,7 @@ import { AddClassComponent } from './popups/add-class/add-class.component';
 import { HomeComponent } from './compenents/home/home.component';
 import { ViewCandidatesComponent } from './compenents/view-candidates/view-candidates.component';
 import { ViewLateReportComponent } from './compenents/view-late-report/view-late-report.component';
+import { ViewLateReportCandidateComponent } from './compenents/view-late-report-candidate/view-late-report-candidate.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ViewLateReportComponent } from './compenents/view-late-report/view-late
     AddClassComponent,
     HomeComponent,
     ViewCandidatesComponent,
-    ViewLateReportComponent
+    ViewLateReportComponent,
+    ViewLateReportCandidateComponent
   ],
   imports: [
     BrowserModule,

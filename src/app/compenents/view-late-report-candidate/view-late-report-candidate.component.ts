@@ -14,8 +14,9 @@ import { SharedService } from 'src/app/services/shared.service';
 })
 export class ViewLateReportCandidateComponent {
   currentUser: any;
-  statuses:string[] = ['late', 'unsure', 'arrived', 'absent']
-  displayedColumns: string[] = ['reportId', 'timeEstimate', 'dateCreated', 'arrivalTime', 'updatedBy', 'changeStatus'];
+  lateReports:any[] = [];
+  statuses:string[] = ['late', 'arrived', 'absent']
+  displayedColumns: string[] = ['reportId', 'createdBy', 'timeEstimate', 'dateCreated', 'arrivalTime', 'updatedBy', 'changeStatus'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -27,9 +28,11 @@ export class ViewLateReportCandidateComponent {
 
   updateUser():void {
     this.currentUser = this.sharedService.get('user', 'session');
-    console.log(this.currentUser);
+    this.lateReports = this.sharedService.get('lateReports', 'local') || [];
+    this.lateReports = this.lateReports.filter((report:any) => report.createdByEmail.toLowerCase() === this.currentUser.email.toLowerCase())
+
     // Assign the candidates to the data source for the table to render
-    this.dataSource = new MatTableDataSource(this.currentUser.lateReports);
+    this.dataSource = new MatTableDataSource(this.lateReports);
   }
 
   ngAfterViewInit() {
@@ -58,10 +61,10 @@ export class ViewLateReportCandidateComponent {
   }
 
   statusUpdate(status: string, reportId:string): void {
-    this.currentUser.lateReports.forEach((report:any, indx: number) => {
+    this.lateReports.forEach((report:any, indx: number) => {
       if(report.reportId === reportId) {
-        this.currentUser.lateReports[indx]['status'] = status;
-        this.currentUser.lateReports[indx]['updatedBy'] = `${this.currentUser.firstName} ${this.currentUser.lastName}`;
+        this.lateReports[indx]['status'] = status;
+        this.lateReports[indx]['updatedBy'] = `${this.currentUser.firstName} ${this.currentUser.lastName}`;
       }
     });
 

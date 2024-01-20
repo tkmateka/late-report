@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
@@ -35,6 +35,21 @@ export class HomeComponent {
         { name: 'View Late Comers', route: '/admin/late-report' },
       ]
     }
+
+    this.listenToRouteChanges();
+  }
+
+  listenToRouteChanges():void {
+    // Navigate to a specific element when route changes
+    this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationEnd) {
+        this.menuItems.forEach((item: any, indx:number) => {
+          if(item.route === event.url) {
+            this.activeLink = indx;
+          }
+        })
+      }
+    })
   }
 
   logout(): void {

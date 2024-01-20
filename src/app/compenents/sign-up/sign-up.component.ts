@@ -55,7 +55,6 @@ export class SignUpComponent {
     delete this.registerFormData.confirmPassword;
     // If this is a candidate, then add them into their specific class
     if (this.registerFormData.role === 'candidate') {
-      this.registerFormData['lateReports'] = [];
       this.classes.forEach((_class: any) => {
         if (_class.classId === this.registerFormData.classId) {
           // Add the new candidate to the current class

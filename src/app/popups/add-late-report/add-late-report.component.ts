@@ -10,6 +10,7 @@ import { SharedService } from 'src/app/services/shared.service';
 })
 export class AddLateReportComponent {
   user:any;
+  lateReports:any[] = [];
   reportFormData: any = {
     reportId: 'report-' + new Date().getTime(),
     timeEstimate: '',
@@ -21,11 +22,14 @@ export class AddLateReportComponent {
 
   constructor(private sharedService: SharedService, private dialogRef: MatDialogRef<AddLateReportComponent>) {
     this.user = this.sharedService.get('user', 'session');
+    this.lateReports = this.sharedService.get('lateReports', 'local') || [];
   }
 
   submit(): void {
-    this.user.lateReports.push(this.reportFormData);
-    sessionStorage.setItem('user', JSON.stringify(this.user));
+    this.reportFormData['createdBy'] = `${this.user.firstName} ${this.user.lastName}`;
+    this.reportFormData['createdByEmail'] = this.user.email;
+    this.lateReports.push(this.reportFormData);
+    localStorage.setItem('lateReports', JSON.stringify(this.lateReports));
     this.close('Report was created successfully')
   }
 

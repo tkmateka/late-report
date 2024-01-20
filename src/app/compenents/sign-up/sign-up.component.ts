@@ -37,7 +37,7 @@ export class SignUpComponent {
 
     if (users?.length > 0) {
       // Check if user already exist
-      const foundUser = users.find((user: any) => users.email === this.registerFormData.email);
+      const foundUser = users.find((user: any) => user.email.toLowerCase() === this.registerFormData.email.toLowerCase());
 
       if (foundUser) {
         // If it does

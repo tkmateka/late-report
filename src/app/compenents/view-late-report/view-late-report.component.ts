@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./view-late-report.component.scss']
 })
 export class ViewLateReportComponent {
-
+  
 }

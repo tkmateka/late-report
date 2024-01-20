@@ -11,7 +11,8 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.pointer, .link {
+.pointer,
+.link {
     cursor: pointer;
 }
 
@@ -20,9 +21,17 @@ body {
     text-decoration: none;
 }
 
-.link:hover, .activeLink {
+.link:hover,
+.activeLink {
     color: crimson;
     text-decoration: underline;
+}
+
+// Filter input
+.filter {
+    .mat-mdc-form-field-subscript-wrapper {
+        display: none;
+    }
 }
 
 // colors
@@ -106,8 +115,13 @@ body {
 .no-margin {
     margin: 0;
 }
+
 .no-top-margin {
     margin-top: 0;
+}
+
+.margin-top-1em {
+    margin-top: 1em;
 }
 
 // Auth card

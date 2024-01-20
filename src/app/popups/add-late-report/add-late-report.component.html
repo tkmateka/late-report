@@ -1,0 +1,31 @@
+<div class="flex column center-center auth-card">
+    <h2 class="text-center no-top-margin">Add a new Report</h2>
+    <form #reportForm="ngForm" class="full-width">
+        <!-- Late Reason -->
+        <mat-form-field class="full-width">
+            <mat-label>Late Reason</mat-label>
+            <input type="text" matInput placeholder="Reason for being late" required [(ngModel)]="reportFormData.reason"
+                name="reason" #reason="ngModel">
+            <mat-error *ngIf="reason.invalid && reason.errors && reason.errors['required']">
+                Late Reason is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Estimated arrival time -->
+        <mat-form-field class="full-width">
+            <mat-label>Estimated time</mat-label>
+            <input type="time" matInput placeholder="08:00" required [(ngModel)]="reportFormData.timeEstimate" name="timeEstimate"
+                #timeEstimate="ngModel">
+            <mat-error *ngIf="timeEstimate.invalid && timeEstimate.errors && timeEstimate.errors['required']">
+                Estimated time is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Action buttons -->
+        <div class="flex gap-1em margin-top-1em">
+            <button mat-raised-button color="warn" class="flex-1" (click)="close()">Cancel</button>
+            <button mat-raised-button color="primary" class="flex-1" [disabled]="reportForm.invalid"
+                (click)="submit()">Submit</button>
+        </div>
+    </form>
+</div>

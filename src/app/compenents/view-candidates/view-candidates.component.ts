@@ -19,7 +19,6 @@ export class ViewCandidatesComponent implements AfterViewInit {
 
   constructor(private sharedService: SharedService) {
     this.mainClass = this.sharedService.get('class', 'session');
-    console.log(this.mainClass);
 
     // Assign the candidates to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.mainClass.candidates);

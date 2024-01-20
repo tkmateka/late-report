@@ -34,7 +34,7 @@ export class SignInComponent {
             let allClasses = this.sharedService.get('classes', 'local');
             let studentClass = allClasses.find((_class:any) => _class.classId === foundUser.classId)
             sessionStorage.setItem('class', JSON.stringify(studentClass));
-            this.router.navigate(['/home/late-report-candidate']);
+            this.router.navigate(['/candidate/late-report-candidate']);
           } else {
             this.router.navigate(['/landing']);
           }

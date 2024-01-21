@@ -56,7 +56,7 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Change Status </th>
                 <td mat-cell *matCellDef="let row; let i = index">
                     <!-- Change Status -->
-                    <button mat-raised-button [matTooltip]="row.status"
+                    <button mat-raised-button [matTooltip]="row.status" disabled
                     [color]="row.status === 'late' ? 'accent' : row.status === 'arrived' ? 'primary' : 'warn'">
                     {{row.status | titlecase}}</button>
                 </td>

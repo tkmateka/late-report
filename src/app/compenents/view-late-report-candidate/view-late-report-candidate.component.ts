@@ -63,12 +63,15 @@ export class ViewLateReportCandidateComponent {
   statusUpdate(status: string, reportId:string): void {
     this.lateReports.forEach((report:any, indx: number) => {
       if(report.reportId === reportId) {
+        if(status === 'arrived') {
+          this.lateReports[indx]['arrivalTime'] = this.sharedService.getTimeFromDate(new Date());
+        }
         this.lateReports[indx]['status'] = status;
         this.lateReports[indx]['updatedBy'] = `${this.currentUser.firstName} ${this.currentUser.lastName}`;
       }
     });
 
-    sessionStorage.setItem('user', JSON.stringify(this.currentUser));
+    localStorage.setItem('lateReports', JSON.stringify(this.lateReports));
     this.updateUser();
   }
 }

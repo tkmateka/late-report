@@ -10,7 +10,7 @@ import { SharedService } from 'src/app/services/shared.service';
 })
 export class SignUpComponent {
   classes: any = [];
-  roles: string[] = ['facilitator', 'candidate', 'admin']
+  roles: string[] = ['facilitator', 'candidate']
   registerFormData: any = {
     firstName: '',
     lastName: '',

@@ -10,16 +10,15 @@ import { ViewCandidatesComponent } from './compenents/view-candidates/view-candi
 import { ViewLateReportComponent } from './compenents/view-late-report/view-late-report.component';
 import { ViewLateReportCandidateComponent } from './compenents/view-late-report-candidate/view-late-report-candidate.component';
 import { CandidateGuard } from './guards/candidate.guard';
-import { AdminGuard } from './guards/admin.guard';
+import { FacilitatorGuard } from './guards/facilitator.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/landing', pathMatch: 'full' }, // redirect to `first-component`
   { path: 'facilitator', redirectTo: '/facilitator/candidate', pathMatch: 'full' }, // redirect to `first-component`
   { path: 'candidate', redirectTo: '/candidate/late-report-candidate', pathMatch: 'full' }, // redirect to `first-component`
-  { path: 'admin', redirectTo: '/admin/candidate', pathMatch: 'full' }, // redirect to `first-component`
-  { path: 'landing', component: LandingComponent, canActivate: [AuthGuard, AdminGuard] },
+  { path: 'landing', component: LandingComponent, canActivate: [AuthGuard, FacilitatorGuard] },
   {
-    path: 'facilitator', component: HomeComponent, canActivate: [AuthGuard, AdminGuard], children: [
+    path: 'facilitator', component: HomeComponent, canActivate: [AuthGuard, FacilitatorGuard], children: [
       { path: 'candidate', component: ViewCandidatesComponent },
       { path: 'late-report', component: ViewLateReportComponent },
     ]
@@ -27,12 +26,6 @@ const routes: Routes = [
   {
     path: 'candidate', component: HomeComponent, canActivate: [AuthGuard, CandidateGuard], children: [
       { path: 'late-report-candidate', component: ViewLateReportCandidateComponent },
-    ]
-  },
-  {
-    path: 'admin', component: HomeComponent, canActivate: [AuthGuard, AdminGuard], children: [
-      { path: 'candidate', component: ViewCandidatesComponent },
-      { path: 'late-report', component: ViewLateReportComponent },
     ]
   },
   { path: 'sign-in', component: SignInComponent },

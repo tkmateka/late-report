@@ -7,7 +7,7 @@ import { Location } from '@angular/common';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements CanActivate {
+export class FacilitatorGuard implements CanActivate {
   constructor(private location: Location, private sharedService: SharedService) {}
 
   canActivate(
@@ -16,7 +16,7 @@ export class AdminGuard implements CanActivate {
 
     let isLoggedIn = this.sharedService.get('user', 'session');
 
-    if (isLoggedIn && (isLoggedIn.role === 'admin' || isLoggedIn.role === 'facilitator')) {
+    if (isLoggedIn && isLoggedIn.role === 'facilitator') {
       return true;
     } else {
       this.location.back();

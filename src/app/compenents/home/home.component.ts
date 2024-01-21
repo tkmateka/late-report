@@ -22,17 +22,11 @@ export class HomeComponent {
       this.menuItems = [
         { name: 'View Late Report', route: '/candidate/late-report-candidate' },
       ]
-    } else if (this.user.role === 'facilitator') {
+    } else {
       // Facilitator
       this.menuItems = [
         { name: 'View Candidates', route: '/facilitator/candidate' },
         { name: 'View Late Comers', route: '/facilitator/late-report' },
-      ]
-    } else {
-      // Admin
-      this.menuItems = [
-        { name: 'View Candidates', route: '/admin/candidate' },
-        { name: 'View Late Comers', route: '/admin/late-report' },
       ]
     }
 

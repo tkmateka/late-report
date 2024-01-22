@@ -9,6 +9,7 @@ import { SharedService } from 'src/app/services/shared.service';
   styleUrls: ['./add-class.component.scss']
 })
 export class AddClassComponent {
+  user:any;
   classes: any[] = [];
   classFormData: any = {
     candidateCount: 0,
@@ -16,8 +17,9 @@ export class AddClassComponent {
   }
 
   constructor(private sharedService: SharedService, private snackbar: MatSnackBar, private dialogRef: MatDialogRef<AddClassComponent>) {
-    const user = this.sharedService.get('user', 'session');
-    this.classFormData['facilitator'] = `${user?.firstName} ${user?.lastName}`;
+    this.user = this.sharedService.get('user', 'session');
+    this.classFormData['facilitator'] = `${this.user?.firstName} ${this.user?.lastName}`;
+    this.classFormData['facilitatorEmail'] = this.user?.email;
     this.classes = this.sharedService.get('classes', 'local') || [];
   }
 

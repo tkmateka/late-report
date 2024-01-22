@@ -14,6 +14,7 @@ import { SharedService } from 'src/app/services/shared.service';
 })
 export class ViewLateReportComponent {
   currentUser: any;
+  currentClass: any;
   lateReports: any[] = [];
   displayedColumns: string[] = ['reportId', 'createdBy', 'timeEstimate', 'dateCreated', 'arrivalTime', 'updatedBy', 'changeStatus'];
   dataSource!: MatTableDataSource<any>;
@@ -23,6 +24,7 @@ export class ViewLateReportComponent {
 
   constructor(private sharedService: SharedService, private datePipe: DatePipe, private excelService: ExportExcelService) {
     this.currentUser = this.sharedService.get('user', 'session');
+    this.currentClass = this.sharedService.get('class', 'session');
     this.updateReports();
   }
 
@@ -53,7 +55,8 @@ export class ViewLateReportComponent {
   }
 
   updateReports(): void {
-    this.lateReports = this.sharedService.get('lateReports', 'local') || [];
+    const allLateReports = this.sharedService.get('lateReports', 'local') || [];
+    this.lateReports = allLateReports.filter((report:any) => report.classId === this.currentClass.classId)
     // Assign the candidates to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.lateReports);
   }

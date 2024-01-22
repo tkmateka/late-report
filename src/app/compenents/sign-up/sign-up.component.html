@@ -25,7 +25,7 @@
             <mat-form-field class="full-width">
                 <mat-label>Email</mat-label>
                 <input type="email" matInput placeholder="Ex. pat@example.com" required
-                    [(ngModel)]="registerFormData.email" name="email" #email="ngModel">
+                    [(ngModel)]="registerFormData.email" name="email" #email="ngModel" [pattern]="emailPattern">
                 <mat-error *ngIf="email.invalid && email.errors && email.errors['pattern']">
                     Please enter a valid email address
                 </mat-error>

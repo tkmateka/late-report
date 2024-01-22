@@ -9,6 +9,7 @@ import { SharedService } from 'src/app/services/shared.service';
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent {
+  emailPattern = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
   loginFormData: any = {
     email: '',
     password: ''

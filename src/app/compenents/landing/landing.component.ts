@@ -31,7 +31,8 @@ export class LandingComponent {
   }
 
   updateClasses():void {
-    this.classes = this.sharedService.get('classes', 'local') || [];
+    const allClasses:any[] = this.sharedService.get('classes', 'local') || [];
+    this.classes = allClasses.filter((_class:any) => _class.facilitatorEmail === this.user.email)
   }
 
   goTo(_class:any):void {

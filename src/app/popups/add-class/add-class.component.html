@@ -21,16 +21,6 @@
             </mat-error>
         </mat-form-field>
 
-        <!-- Facilitator -->
-        <mat-form-field class="full-width">
-            <mat-label>Facilitator</mat-label>
-            <input type="text" matInput placeholder="Maths" required [(ngModel)]="classFormData.facilitator"
-                name="facilitator" #facilitator="ngModel" readonly>
-            <mat-error *ngIf="facilitator.invalid && facilitator.errors && facilitator.errors['required']">
-                Facilitator is <strong>required</strong>
-            </mat-error>
-        </mat-form-field>
-
         <!-- Time In/Out -->
         <div class="flex gap-1em">
             <!-- In -->

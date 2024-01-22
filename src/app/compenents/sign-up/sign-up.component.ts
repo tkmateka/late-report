@@ -9,6 +9,7 @@ import { SharedService } from 'src/app/services/shared.service';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent {
+  emailPattern = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
   classes: any = [];
   roles: string[] = ['facilitator', 'candidate']
   registerFormData: any = {

@@ -16,7 +16,7 @@ export class ViewLateReportComponent {
   currentUser: any;
   currentClass: any;
   lateReports: any[] = [];
-  displayedColumns: string[] = ['reportId', 'createdBy', 'timeEstimate', 'dateCreated', 'arrivalTime', 'updatedBy', 'changeStatus'];
+  displayedColumns: string[] = ['reportId', 'createdBy', 'timeEstimate', 'dateCreated', 'reason', 'arrivalTime', 'updatedBy', 'changeStatus'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
